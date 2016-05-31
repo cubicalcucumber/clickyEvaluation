@@ -27,9 +27,10 @@ import AST (Path, Expr, TypeTree, Output, TypeError)
 import TypeChecker (TypeEnv, txToABC, buildPartiallyTypedTree, typeTreeProgramnEnv, checkForError, prettyPrintTypeError, buildTypeEnv)
 import Parser (parseDefs, parseExpr)
 import JSHelpers (ctrlKeyPressed, prepend, jqMap, warnOnRefresh, isEnterKey, showTypes)
+import DOMUtils as DU
 
-main :: DOMEff J.JQuery
-main = J.ready $ do
+main :: DOMEff Unit
+main = DU.ready $ do
   J.select "#input"
     >>= J.on "change" (\_ _ -> startEvaluation)
     >>= J.on "keyup"  (\e _ -> if isEnterKey e then startEvaluation else return unit)
